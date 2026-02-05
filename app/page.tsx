@@ -103,9 +103,19 @@ export default function Home() {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap');
-          
+          :root {
+            color-scheme: light;
+          }
+
+
+          * {
+            forced-color-adjust: none;
+          }
+
           body {
             overflow-x: hidden;
+            background-color: white;
+            color: #9270A8;
           }
           .inter {
             font-family: "Inter", sans-serif;

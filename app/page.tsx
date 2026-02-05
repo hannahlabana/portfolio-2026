@@ -9,6 +9,27 @@ export default function Home() {
 
   return (
     <>
+      <Script id="fade-up-observer" strategy="afterInteractive">
+        {`
+          const elements = document.querySelectorAll(".fade-up");
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("show");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15 }
+          );
+
+          elements.forEach(el => observer.observe(el));
+        `}
+      </Script>
+
+
       <Script id="heart-cursor" strategy="afterInteractive">
         {`
           var colours=['#f00','#f06','#f0f','#f6f','#f39','#f9c'];
@@ -100,6 +121,7 @@ export default function Home() {
           }
         `}
       </Script>
+
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap');
@@ -117,6 +139,18 @@ export default function Home() {
             background-color: white;
             color: #9270A8;
           }
+
+          .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+          }
+
+          .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
           .inter {
             font-family: "Inter", sans-serif;
             font-optical-sizing: auto;
@@ -149,7 +183,7 @@ export default function Home() {
     <div className="absolute -z-10 w-1/4 h-1/4 rounded-full bg-gradient-to-br from-[#FFE2F0] to-white blur-3xl opacity-100 top-140 right-1/4" />
     <div className="absolute -z-10 w-1/4 h-1/4 rounded-full bg-gradient-to-br from-[#FFE2F0] to-white blur-3xl opacity-100 top-350 left-1/4" />
     <div className="absolute -z-10 w-1/4 h-1/4 rounded-full bg-gradient-to-br from-[#FFE2F0] to-white blur-3xl opacity-100 top-600 right-2/7" />
-    <section id="home" className="h-full w-full flex justify-center relative">
+    <section id="home" className="fade-up h-full w-full flex justify-center relative">
       <div className="border-pink-100 border-4 h-full w-full sm:w-4/5 md:w-3/5 lg:w-2/5 my-4 sm:my-8 md:my-16 mx-2 sm:mx-0">
 
         {/* HEADER */}
@@ -185,7 +219,7 @@ export default function Home() {
           </div>
         </div>
         {/* ABOUT ME */}
-        <section id="about" className="flex justify-center flex-col items-center mt-2 px-6 sm:px-12 md:px-16">
+        <section id="about" className="fade-up flex justify-center flex-col items-center mt-2 px-6 sm:px-12 md:px-16">
           <h1 className="pixelify-sans font-bold text-xl sm:text-2xl text-[#9270A8] pt-6 sm:pt-8">˚ʚ♡ɞ˚ about me ˚ʚ♡ɞ˚</h1>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 w-full mt-4">
             <div className="w-full md:w-3/6 order-2 md:order-1">
@@ -274,7 +308,7 @@ export default function Home() {
           </div>
         </section>
         {/* PROJECTS */}
-        <section id="projects" className="flex justify-center flex-col items-center mt-2 h-full w-full pb-8">
+        <section id="projects" className="fade-up flex justify-center flex-col items-center mt-2 h-full w-full pb-8">
           <h1 className="pixelify-sans font-bold text-xl sm:text-2xl text-[#9270A8] pt-6 sm:pt-8">˚ ☆ projects ☆</h1>
           <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center w-full h-full px-4 sm:px-8 py-6 sm:py-8 gap-6 sm:gap-x-8 sm:gap-y-4">
             {/* TRIPPER */}
